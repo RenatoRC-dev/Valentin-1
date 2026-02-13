@@ -40,12 +40,12 @@ let carpirCursorPreparing = false;
 const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
 const isSmallViewport = window.matchMedia('(max-width: 768px)').matches;
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const fireflyDensityBase = prefersReducedMotion ? 4 : (isCoarsePointer || isSmallViewport ? 10 : 25);
-const fireflySpawnMsBase = prefersReducedMotion ? 2600 : (isCoarsePointer || isSmallViewport ? 1900 : 1200);
+const fireflyDensityBase = prefersReducedMotion ? 3 : (isCoarsePointer || isSmallViewport ? 6 : 25);
+const fireflySpawnMsBase = prefersReducedMotion ? 3000 : (isCoarsePointer || isSmallViewport ? 2200 : 1200);
 
 // === 1. GeneraciÃ³n de los 16 pÃ©talos ===
-const petalLabels = ['', 'Semillas', 'Carpir', 'Galer\u00eda', '', '', '', ''];
-const petalTargets = [null, 'seeds-panel', 'carpir-panel', 'memories', null, null, null, null];
+const petalLabels = ['Semillas', '', 'Carpir', '', '', '', 'Galer\u00eda', ''];
+const petalTargets = ['seeds-panel', null, 'carpir-panel', null, null, null, 'memories', null];
 
 function createPetal(index) {
   const petal = document.createElement('div');
@@ -80,6 +80,7 @@ function createPetal(index) {
     }
 
     if (targetId) {
+      petal.classList.add('petal-active');
       petal.addEventListener('click', (e) => {
         e.stopPropagation();
         showPanel(targetId);

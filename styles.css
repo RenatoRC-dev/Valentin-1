@@ -251,18 +251,27 @@ body::after {
 /* Etiquetas de Texto */
 .petal-label {
   position: absolute;
-  top: 10px;
+  top: 8px;
   left: 50%;
   /* Contra-rotación para legibilidad */
   transform: translateX(-50%) rotate(calc(var(--angle) * -1));
   color: var(--cream);
   font-family: 'Playfair Display', serif;
-  font-size: 0.8rem;
+  font-size: 0.84rem;
   font-weight: 700;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  text-shadow: 0 2px 7px rgba(0, 0, 0, 0.72);
   white-space: nowrap;
+  padding: 0.16rem 0.45rem;
+  border-radius: 999px;
+  background: rgba(12, 12, 12, 0.42);
+  border: 1px solid rgba(255, 242, 214, 0.36);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.22);
   z-index: 3;
   pointer-events: none;
+}
+
+.petal-front.petal-active .petal-label {
+  opacity: 1;
 }
 
 /* Animación de Viento */
@@ -1636,9 +1645,17 @@ body.eco-mode {
     padding: 0.2rem;
   }
 
+  .petal-front.petal-active {
+    width: clamp(74px, 20vw, 98px);
+    height: clamp(132px, 34vw, 176px);
+  }
+
   .petal-label {
-    top: 8px;
-    font-size: 0.68rem;
+    top: 5px;
+    font-size: 0.79rem;
+    padding: 0.14rem 0.42rem;
+    background: rgba(0, 0, 0, 0.55);
+    border-color: rgba(255, 241, 205, 0.44);
   }
 
   .panel-header p {
@@ -1724,12 +1741,17 @@ body.eco-mode {
   }
 
   .petal {
-    width: clamp(56px, 15vw, 70px);
-    height: clamp(96px, 24vw, 120px);
+    width: clamp(58px, 16vw, 72px);
+    height: clamp(102px, 26vw, 126px);
+  }
+
+  .petal-front.petal-active {
+    width: clamp(68px, 19vw, 84px);
+    height: clamp(124px, 33vw, 158px);
   }
 
   .petal-label {
-    font-size: 0.62rem;
+    font-size: 0.73rem;
   }
 
   .forest-panel,
@@ -1746,6 +1768,11 @@ body.eco-mode {
 }
 
 @media (pointer: coarse) {
+  body::before,
+  body::after {
+    display: none;
+  }
+
   body {
     background-attachment: scroll;
   }
@@ -1756,12 +1783,13 @@ body.eco-mode {
   }
 
   #sunflower-container.florecer .petal {
-    animation-duration: 6.2s;
+    animation: none;
   }
 
   .pollen {
     width: 6px;
     height: 6px;
     box-shadow: 0 0 8px 3px rgba(255, 238, 88, 0.45);
+    animation: fireflyFade 6s ease-in-out infinite;
   }
 }
