@@ -32,6 +32,11 @@ body {
   transition: filter 2s ease;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 body.final-sequence-lighting {
   filter: brightness(0.6) saturate(1);
 }
@@ -173,8 +178,8 @@ body::after {
 /* === SUNFLOWER CONTAINER === */
 #sunflower-container {
   position: relative;
-  width: 600px;
-  height: 600px;
+  width: min(600px, 94vw);
+  height: min(600px, 94vw);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -185,8 +190,8 @@ body::after {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 200px;
-  height: 200px;
+  width: clamp(118px, 31vw, 200px);
+  height: clamp(118px, 31vw, 200px);
   transform: translate(-50%, -50%);
   border-radius: 50%;
   clip-path: circle(48.5%);
@@ -206,8 +211,8 @@ body::after {
   position: absolute;
   bottom: 50%;
   left: 50%;
-  width: 90px;
-  height: 150px;
+  width: clamp(62px, 15vw, 90px);
+  height: clamp(108px, 25vw, 150px);
   transform-origin: bottom center;
   transform: translate(-50%, 0) rotate(var(--angle)) scale(0);
   opacity: 0;
@@ -430,7 +435,7 @@ body::after {
 
 .panel-header h2 {
   font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
+  font-size: clamp(1.8rem, 4.4vw, 2.5rem);
   color: #f6e2c4;
   margin-bottom: 0.75rem;
   text-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
@@ -1585,28 +1590,142 @@ body.eco-mode {
 }
 
 /* Responsive */
-@media (max-width: 768px) {
-  .memory-stage {
-    grid-template-columns: 1fr;
+@media (max-width: 1024px) {
+  .glass-panel {
+    padding: 2.1rem;
   }
 
-  .sunflower-menu {
-    width: 350px;
-    height: 350px;
+  .forest-panel,
+  .seeds-stage,
+  .seeds-field {
+    min-height: 460px;
+  }
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding: 1rem 0.7rem;
+    gap: 2rem;
+  }
+
+  .glass-panel {
+    border-radius: 18px;
+    padding: 1.25rem;
+  }
+
+  .hero {
+    min-height: 74vh;
+  }
+
+  .hero-grid {
+    padding: 0.2rem;
+  }
+
+  .petal-label {
+    top: 8px;
+    font-size: 0.68rem;
+  }
+
+  .panel-header p {
+    font-size: 0.98rem;
+    line-height: 1.55;
+  }
+
+  .forest-layout {
+    gap: 1rem;
+  }
+
+  .forest-panel,
+  .seeds-stage,
+  .seeds-field {
+    min-height: 390px;
+    border-radius: 18px;
+  }
+
+  .daisy,
+  .seed-daisy {
+    width: 86px;
+    height: 86px;
+  }
+
+  .carpir-reveal {
+    width: min(94vw, 520px);
+    border-radius: 14px;
+  }
+
+  #carpirCursor {
+    width: 56px;
+  }
+
+  .link-btn {
+    width: 100%;
+    max-width: 340px;
+    padding: 0.85rem 1.2rem;
+    font-size: 0.95rem;
+  }
+
+  .note-card {
+    max-width: min(92vw, 620px);
+    padding: 1.2rem 1rem 1.3rem;
+  }
+
+  .note-close {
+    top: 8px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+  }
+
+  .note-text {
+    font-size: 0.97rem;
+    padding-right: 1.7rem;
+  }
+
+  .final-card {
+    max-width: min(94vw, 680px);
+    padding: 1.2rem;
+  }
+
+  .final-pre {
+    letter-spacing: 0.2em;
+    font-size: 0.73rem;
+  }
+
+  .final-card h3 {
+    font-size: clamp(1.06rem, 5.6vw, 1.5rem);
+    line-height: 1.45;
+  }
+}
+
+@media (max-width: 420px) {
+  #sunflower-container {
+    width: min(600px, 96vw);
+    height: min(600px, 96vw);
   }
 
   .sunflower-center {
-    width: 140px;
-    height: 140px;
+    width: clamp(104px, 30vw, 140px);
+    height: clamp(104px, 30vw, 140px);
   }
 
   .petal {
-    width: 120px;
-    height: 60px;
+    width: clamp(56px, 15vw, 70px);
+    height: clamp(96px, 24vw, 120px);
   }
 
-  .sunflower-menu.florecer .petal {
-    transform:
-      rotate(calc(var(--i) * 45deg + 10deg)) translate(100px) scale(1);
+  .petal-label {
+    font-size: 0.62rem;
+  }
+
+  .forest-panel,
+  .seeds-stage,
+  .seeds-field {
+    min-height: 340px;
+  }
+
+  .daisy,
+  .seed-daisy {
+    width: 76px;
+    height: 76px;
   }
 }
