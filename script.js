@@ -37,6 +37,11 @@ let carpirMeasureRaf = null;
 let carpirBound = false;
 let carpirCursorPrepared = false;
 let carpirCursorPreparing = false;
+const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+const isSmallViewport = window.matchMedia('(max-width: 768px)').matches;
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fireflyDensityBase = prefersReducedMotion ? 4 : (isCoarsePointer || isSmallViewport ? 10 : 25);
+const fireflySpawnMsBase = prefersReducedMotion ? 2600 : (isCoarsePointer || isSmallViewport ? 1900 : 1200);
 
 // === 1. GeneraciÃ³n de los 16 pÃ©talos ===
 const petalLabels = ['', 'Semillas', 'Carpir', 'Galer\u00eda', '', '', '', ''];
@@ -143,15 +148,15 @@ function createFirefly(densityBoost = 0) {
   setTimeout(() => firefly.remove(), 12000);
 }
 
-function startFireflies(density = 25) {
+function startFireflies(density = 25, spawnEvery = 1200) {
   if (!pollenContainer) return;
   pollenContainer.innerHTML = '';
   for (let i = 0; i < density; i++) createFirefly();
   clearInterval(fireflyTimer);
-  fireflyTimer = setInterval(() => createFirefly(), 1200);
+  fireflyTimer = setInterval(() => createFirefly(), spawnEvery);
 }
 
-startFireflies();
+startFireflies(fireflyDensityBase, fireflySpawnMsBase);
 
 // === 5. GalerÃ­a de ExploraciÃ³n Forestal (linterna + margaritas) ===
 const forestSeeds = [
